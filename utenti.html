@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="users">
+
+</div>
+
+<script>
+    var xmlhttp = new XMLHttpRequest();
+    var url = "data.json";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            loadingData(myArr);
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    function loadingData(arr) {
+        var out = "";
+        var i;
+        console.log(arr);
+        for(i = 0; i < arr.users.length; i++) {
+            out += '<b>' + arr.users[i].name + ' ' +
+                arr.users[i].password + '</b><br>';
+        }
+        document.getElementById("users").innerHTML = out;
+    }
+</script>
+</body>
+</html>
